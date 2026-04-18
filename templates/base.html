@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SemCraft - {% block title %}{% endblock %}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <!-- Ambient Blur Background -->
+    <div class="blob blob-1"></div>
+    <div class="blob blob-2"></div>
+    <div class="blob blob-3"></div>
+    
+    <nav class="navbar">
+        <div class="container nav-container">
+            <a href="/" class="logo">SemCraft</a>
+            <ul class="nav-links">
+                <!-- Links moved to footer and hero -->
+                <li>
+                    <button id="theme-toggle" class="theme-toggle" aria-label="Toggle Dark Mode">
+                        <span id="theme-icon">🌙</span>
+                    </button>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <main>
+        {% block content %}{% endblock %}
+    </main>
+
+    <footer class="site-footer">
+        <div class="container footer-content wrapper-footer">
+            <div class="footer-sections">
+                <div class="footer-col">
+                    <h3>Quick Links</h3>
+                    <ul class="footer-links">
+                        <li><a href="/faq">FAQ</a></li>
+                        <li><a href="/blog">Blog</a></li>
+                        <li><a href="/developer">Developer</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col right-align">
+                    <p class="dev-text">Designed & Developed by<br><span class="dev-names">Parth Shendkar & Mayur Patil</span></p>
+                </div>
+            </div>
+        </div>
+        <div class="footer-brand">
+            <h1 class="huge-brand-text">SEMCRAFT</h1>
+        </div>
+    </footer>
+
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+</body>
+</html>

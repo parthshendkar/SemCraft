@@ -1,0 +1,101 @@
+{% extends "base.html" %}
+
+{% block title %}Home{% endblock %}
+
+{% block content %}
+<section class="hero-section">
+    <div class="container hero-content">
+        <h1>Automate Your Exam Prep</h1>
+        <p>A smart, elegant tool for generating perfectly structured theory practice papers. Save time and study smarter.</p>
+        <a href="/generate" class="cta-button">Generate Your First Paper</a>
+    </div>
+</section>
+
+<section class="features-section">
+    <div class="container">
+        <h2>Why Choose SemCraft?</h2>
+        <div class="feature-cards">
+            <div class="card">
+                <h3>Smart Selection</h3>
+                <p>Our algorithm flawlessly picks balanced questions across syllabus units for realistic exam rendering.</p>
+            </div>
+            <div class="card">
+                <h3>Instant Formatting</h3>
+                <p>No more manual documents. Get perfectly formatted collegiate PDF layouts ready for print instantly.</p>
+            </div>
+            <div class="card">
+                <h3>Beautiful & Intuitive</h3>
+                <p>A distraction-free, modern interface designed so you can focus strictly on what matters.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="feedback-section testimonials-section">
+    <div class="container">
+        <h2>Student Feedback</h2>
+        <div class="testimonial-grid">
+            {% if feedback_items %}
+                {% for item in feedback_items %}
+                <div class="testimonial feedback-card">
+                    <p>"{{ item.feedback }}"</p>
+                    <div class="feedback-footer">
+                        <cite>— {{ item.name }} ({{ item.department }})</cite>
+                        <span class="char-count">{{ item.feedback|length }} chars</span>
+                    </div>
+                </div>
+                {% endfor %}
+            {% else %}
+                <div class="testimonial feedback-card">
+                    <p>"Be the first to share your experience with SemCraft!"</p>
+                    <div class="feedback-footer">
+                        <cite>— SemCraft Team</cite>
+                        <span class="char-count">46 chars</span>
+                    </div>
+                </div>
+            {% endif %}
+        </div>
+        
+        <div class="feedback-action" style="text-align: center; margin-top: 40px;">
+            <button id="give-feedback-btn" class="cta-button">Give Feedback</button>
+        </div>
+    </div>
+</section>
+
+<!-- Feedback Modal Pop-up -->
+<div id="feedback-modal" class="modal">
+    <div class="modal-content">
+        <span class="close-modal" id="close-feedback">&times;</span>
+        <h2>Submit Feedback</h2>
+        <form id="feedback-form" action="/feedback" method="POST" data-feedback-form="true">
+            <div class="form-group" style="margin-bottom: 20px;">
+                <label for="student-name" style="display: block; margin-bottom: 5px; font-weight: 500;">Name</label>
+                <input type="text" id="student-name" name="name" required style="width: 100%; padding: 12px; border-radius: 8px; border: 1px solid var(--text-muted); background: var(--bg-main); color: var(--text-main);">
+            </div>
+            <div class="form-group" style="margin-bottom: 20px;">
+                <label for="feedback-department" style="display: block; margin-bottom: 5px; font-weight: 500;">Department</label>
+                <select id="feedback-department" name="department" required style="width: 100%; padding: 12px; border-radius: 8px; border: 1px solid var(--text-muted); background: var(--bg-main); color: var(--text-main);">
+                    <option value="" disabled selected>Select Department</option>
+                    <option value="CSE">Computer Science and Engineering</option>
+                    <option value="CSE_AIML">Computer Science and Engineering (AI & ML)</option>
+                    <option value="CSE_REGIONAL">Computer Science and Engineering Regional</option>
+                    <option value="IT">Information Technology</option>
+                    <option value="MECH">Mechanical Engineering</option>
+                    <option value="CIVIL">Civil Engineering</option>
+                    <option value="ENTC">Electronics and Telecommunication</option>
+                </select>
+            </div>
+            <div class="form-group" style="margin-bottom: 20px;">
+                <label for="feedback-prn" style="display: block; margin-bottom: 5px; font-weight: 500;">PRN</label>
+                <input type="text" id="feedback-prn" name="prn" required style="width: 100%; padding: 12px; border-radius: 8px; border: 1px solid var(--text-muted); background: var(--bg-main); color: var(--text-main);">
+            </div>
+            <div class="form-group" style="position: relative; margin-bottom: 20px;">
+                <label for="feedback-text" style="display: block; margin-bottom: 5px; font-weight: 500;">Your Feedback</label>
+                <textarea id="feedback-text" name="feedback" rows="4" maxlength="250" required style="width: 100%; padding: 12px; border-radius: 8px; border: 1px solid var(--text-muted); background: var(--bg-main); color: var(--text-main); font-family: inherit; resize: vertical;"></textarea>
+                <div id="feedback-char-count" style="text-align: right; font-size: 0.8rem; color: var(--text-muted); margin-top: 5px;">0/250</div>
+            </div>
+            <button type="submit" class="cta-button" style="width: 100%;">Submit Feedback</button>
+        </form>
+    </div>
+</div>
+{% endblock %}

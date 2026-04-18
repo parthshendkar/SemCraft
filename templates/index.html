@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Semcraft</title>
+    <link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Semcraft</h1>
+            <p>Generate your semester question papers instantly.</p>
+        </header>
+
+        <main>
+            <div class="form-group">
+                <label for="subject-select">Select Subject</label>
+                <select id="subject-select" disabled>
+                    <option value="" selected disabled>Loading subjects...</option>
+                </select>
+            </div>
+
+            <button id="generate-btn" disabled>Generate Paper</button>
+            
+            <div id="status-area" class="hidden">
+                <p id="status-message"></p>
+                <a id="download-link" href="#" class="btn-secondary hidden" target="_blank">Download PDF</a>
+            </div>
+        </main>
+
+        <footer>
+            <p>&copy; 2026 Semcraft. Simple & Effective.</p>
+        </footer>
+    </div>
+    <script src="/static/js/script.js"></script>
+</body>
+</html>

@@ -1,0 +1,100 @@
+{% extends "base.html" %}
+
+{% block title %}FAQ - SemCraft{% endblock %}
+
+{% block content %}
+<div class="container page-container">
+    <style>
+        .faq-item {
+            margin-bottom: 1rem;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            background: var(--card-bg);
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+        
+        .faq-question {
+            padding: 1.2rem;
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .faq-question:hover {
+            color: var(--primary-color);
+        }
+        
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            opacity: 0;
+            padding: 0 1.2rem;
+            transition: max-height 0.4s ease, opacity 0.4s ease, padding 0.4s ease;
+        }
+        
+        /* When parent has .active class */
+        .faq-item.active .faq-answer {
+            max-height: 300px;
+            opacity: 1;
+            padding-bottom: 1.2rem;
+        }
+        
+        .faq-item.active .icon {
+            transform: rotate(45deg);
+        }
+
+        .icon {
+            transition: transform 0.3s ease;
+            font-size: 1.2rem;
+        }
+    </style>
+    
+    <div class="faq-section" style="max-width: 800px; margin: 0 auto; padding: 2rem 0;">
+        <h2 style="color: var(--primary-color); text-align: center; margin-bottom: 2rem;">Frequently Asked Questions</h2>
+        
+        <div class="faq-item">
+            <div class="faq-question" onclick="this.parentElement.classList.toggle('active')">
+                <span>How does SemCraft generate papers?</span>
+                <span class="icon">+</span>
+            </div>
+            <div class="faq-answer">
+                <p>SemCraft uses Python and Pandas in the backend to randomly select questions from a Master Question Bank Excel file according to the specified schema, ensuring a well-balanced paper every time.</p>
+            </div>
+        </div>
+
+        <div class="faq-item">
+            <div class="faq-question" onclick="this.parentElement.classList.toggle('active')">
+                <span>Can I review the paper before downloading?</span>
+                <span class="icon">+</span>
+            </div>
+            <div class="faq-answer">
+                <p>Yes! Once you generate a paper, you are taken to a "Preview" page where you can read all the questions. If you don't like them, you can simply generate a new one.</p>
+            </div>
+        </div>
+
+        <div class="faq-item">
+            <div class="faq-question" onclick="this.parentElement.classList.toggle('active')">
+                <span>Are the downloaded PDFs formatted correctly?</span>
+                <span class="icon">+</span>
+            </div>
+            <div class="faq-answer">
+                <p>Absolutely. The PDF generation ensures that the downloaded file contains the exact same questions as your preview, strictly formatted with college headers and proper academic spacing.</p>
+            </div>
+        </div>
+        
+        <div class="faq-item">
+            <div class="faq-question" onclick="this.parentElement.classList.toggle('active')">
+                <span>Who built SemCraft?</span>
+                <span class="icon">+</span>
+            </div>
+            <div class="faq-answer">
+                <p>SemCraft is a student-built project aimed at simplifying academic preparation while showcasing clean frontend design and full-stack integration.</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

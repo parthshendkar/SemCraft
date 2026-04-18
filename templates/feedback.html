@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+
+{% block title %}Feedback{% endblock %}
+
+{% block content %}
+<div class="container page-container">
+    <div class="form-card">
+        <h2>We value your feedback</h2>
+        <form id="feedback-form" action="/feedback" method="POST" data-feedback-form="true">
+            <div class="form-group">
+                <label for="student-name">Student Name</label>
+                <input type="text" id="student-name" name="name" required placeholder="Enter your name">
+            </div>
+
+            <div class="form-group">
+                <label for="department">Department</label>
+                <select id="department" name="department" required>
+                    <option value="" disabled selected>Select Department</option>
+                    <option value="CSE">Computer Science and Engineering</option>
+                    <option value="CSE_AIML">Computer Science and Engineering (AI & ML)</option>
+                    <option value="CSE_REGIONAL">Computer Science and Engineering Regional</option>
+                    <option value="IT">Information Technology</option>
+                    <option value="MECH">Mechanical Engineering</option>
+                    <option value="CIVIL">Civil Engineering</option>
+                    <option value="ENTC">Electronics and Telecommunication</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="prn">PRN</label>
+                <input type="text" id="prn" name="prn" required placeholder="Enter your PRN">
+            </div>
+
+            <div class="form-group">
+                <label for="feedback-text">Feedback</label>
+                <textarea id="feedback-text" name="feedback" rows="5" maxlength="300" required placeholder="Tell us what you think..."></textarea>
+                <div class="char-counter"><span id="feedback-char-count">0/300 chars</span></div>
+            </div>
+
+            <button type="submit" class="primary-btn">Submit Feedback</button>
+        </form>
+    </div>
+</div>
+{% endblock %}

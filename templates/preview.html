@@ -1,0 +1,55 @@
+{% extends "base.html" %}
+
+{% block title %}Test Preview{% endblock %}
+
+{% block content %}
+<div class="container page-container">
+    <div class="paper-preview">
+        <div class="paper-header">
+            <div class="university-header">
+                <h3>Pimpri Chinchwad College of Engineering</h3>
+                <p>Department of Artificial Intelligence & Machine Learning</p>
+                <hr>
+            </div>
+            <div class="paper-meta">
+                <p><strong>Department:</strong> <span>{{ department }}</span></p>
+                <p><strong>Subject:</strong> <span>{{ subject }}</span></p>
+                <p><strong>Semester:</strong> <span>{{ semester }}</span></p>
+                <p><strong>Time:</strong> <span>{% if total_marks == 60 %}2.5{% else %}1.0{% endif %}</span> Hour(s)</p>
+                <p><strong>Maximum Marks:</strong> <span>{{ total_marks }}</span></p>
+            </div>
+        </div>
+
+        <div class="paper-instructions">
+            <h4>Instructions:</h4>
+            <ul>
+                <li>All questions are compulsory.</li>
+                <li>Figures to the right indicate full marks.</li>
+                <li>Assume suitable data if necessary.</li>
+            </ul>
+        </div>
+
+        <div class="paper-body" id="questions-container">
+            {% if paper %}
+                {% set ns = namespace(q_number=1) %}
+                {% for unit_section in paper %}
+                    <h3>{{ unit_section.unit }}</h3>
+                    {% for q in unit_section.questions %}
+                    <div class="question-item">
+                        Q{{ ns.q_number }}. {{ q.question }} <span style="float:right;">[{{ q.marks }} Marks]</span>
+                    </div>
+                    {% set ns.q_number = ns.q_number + 1 %}
+                    {% endfor %}
+                {% endfor %}
+            {% else %}
+                <p class="placeholder-text">No paper generated yet. Go to 'Generate Test' to create one.</p>
+            {% endif %}
+        </div>
+    </div>
+
+    <div class="action-buttons">
+        <a href="/download" class="primary-btn">Download as PDF</a>
+        <a href="/generate" class="secondary-btn">Generate Another Test</a>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,94 @@
+{% extends "base.html" %}
+
+{% block title %}Generate Test{% endblock %}
+
+{% block content %}
+<div class="container page-container">
+    <div class="form-card">
+        <h2>Generate Your Test Paper</h2>
+        <form id="generate-form" action="/preview" method="POST">
+            <div class="form-group">
+                <label for="department">Department</label>
+                <select id="department" name="department" required>
+                    <option value="" disabled selected>Select Department</option>
+                    <option value="CSE">Computer Science and Engineering</option>
+                    <option value="CSE_AIML">Computer Science and Engineering (AI & ML)</option>
+                    <option value="CSE_REGIONAL">Computer Science And Engineering Regional</option>
+                    <option value="IT">Information Technology</option>
+                    <option value="MECH">Mechanical Engineering</option>
+                    <option value="CIVIL">Civil Engineering</option>
+                    <option value="ENTC">Electronics and Telecommunication</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="semester">Semester</label>
+                <select id="semester" name="semester" required>
+                    <option value="" disabled selected>Select Semester</option>
+                    <option value="1">Semester I</option>
+                    <option value="2">Semester II</option>
+                    <option value="3">Semester III</option>
+                    <option value="4">Semester IV</option>
+                    <option value="5">Semester V</option>
+                    <option value="6">Semester VI</option>
+                    <option value="7">Semester VII</option>
+                    <option value="8">Semester VIII</option>
+                </select>
+            </div>
+
+            <div class="form-group" id="subject-group" style="display: none;">
+                <label for="subject">Subject</label>
+                <select id="subject" name="subject" required>
+                    <option value="" disabled selected>Select Subject</option>
+                    <!-- Populated by JS -->
+                </select>
+            </div>
+
+            <div class="form-group" id="unit-group" style="display: none;">
+                <label>Select Units</label>
+                <div id="unit-checkboxes" class="checkbox-group">
+                    <!-- Populated by JS -->
+                </div>
+            </div>
+
+            <button type="submit" class="primary-btn" id="generate-btn">Generate Test</button>
+        </form>
+    </div>
+
+    <section class="history-section">
+        <h2>Your Generated History</h2>
+
+        {% if generation_history %}
+        <div class="feature-cards history-grid">
+            {% for item in generation_history %}
+            <div class="card history-card">
+                <h3>{{ item.subject }}</h3>
+                <p><strong>Department:</strong> {{ item.department }}</p>
+                <p><strong>Semester:</strong> {{ item.semester }}</p>
+                <p><strong>Marks:</strong> {{ item.total_marks }}</p>
+                <p><strong>Generated:</strong> {{ item.created_at[:19].replace('T', ' ') if item.created_at else 'N/A' }}</p>
+                <div class="history-actions">
+                    <a href="/preview?paper_id={{ item.id }}" class="secondary-btn history-btn">View</a>
+                    <a href="/download?paper_id={{ item.id }}" class="primary-btn history-btn">Download</a>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        {% else %}
+        <div class="form-card" style="margin-top: 20px;">
+            <p class="placeholder-text" style="text-align:center;">No generated papers yet. Your history will appear here after you generate one.</p>
+        </div>
+        {% endif %}
+    </section>
+</div>
+
+<!-- Modal -->
+<div id="loading-modal" class="modal hidden">
+    <div class="modal-content">
+        <span class="close-modal">&times;</span>
+        <h3>Generating Test...</h3>
+        <p>Please wait while we prepare your question paper.</p>
+        <div class="spinner"></div>
+    </div>
+</div>
+{% endblock %}
