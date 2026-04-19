@@ -2,5 +2,3 @@ __pycache__/
 *.pyc
 .env
 *.pdf
-.DS_Store
-local_feedback.json

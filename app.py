@@ -4,6 +4,7 @@ import backend
 import os
 import secrets
 import io
+from datetime import timedelta
 
 from supabase_service import SupabaseService
 
@@ -11,8 +12,16 @@ load_dotenv()
 
 app = Flask(__name__)
 app.secret_key = os.getenv('FLASK_SECRET_KEY', 'semcraft_secret_key')
+app.config['PERMANENT_SESSION_LIFETIME'] = timedelta(days=365)
+app.config['SESSION_REFRESH_EACH_REQUEST'] = True
 
 supabase_service = SupabaseService()
+
+
+@app.before_request
+def keep_browser_session_persistent() -> None:
+    # Keep the same browser identity token even after closing/reopening browser.
+    session.permanent = True
 
 
 def get_owner_token() -> str:
